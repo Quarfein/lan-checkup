@@ -3,7 +3,7 @@ public class main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		client client = new client("134.59.139.211",5000);
+		client client = new client("127.0.0.1",5000);
 	}
 
 }

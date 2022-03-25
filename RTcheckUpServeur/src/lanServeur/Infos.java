@@ -2,10 +2,13 @@ package lanServeur;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 import java.io.File;
+import java.io.Serializable;
 import java.lang.management.ManagementFactory;
 
-public class Infos {
+public class Infos implements Serializable{
 	
 	private String hostName;
 	private String os;
@@ -52,5 +55,21 @@ public class Infos {
 		System.out.println("Fréquence du CPU : " + cpuFrequency);
 		System.out.println("Charge du CPU : " + cpuLoad);
 		System.out.println("Température : " + cpuTemp);
+	}
+	
+	List<String> getInfos() {
+		List<String> allInfos = new ArrayList<String>();
+		allInfos.add(hostName);
+		allInfos.add(os);
+		allInfos.add(Long.toString(diskSize/ (1024*1024*1024)) + "Go");
+		allInfos.add(Long.toString(freeDiskSpace/ (1024*1024*1024)) + "Go");
+		allInfos.add(Long.toString(ram/ (1024*1024*1024)) + "Go");
+		allInfos.add(Float.toString(freeRam/ (1024*1024*1024)) + "Go");
+		allInfos.add(cpuName);
+		allInfos.add(cpuFrequency);
+		allInfos.add(Double.toString(cpuLoad));
+		allInfos.add(cpuTemp);
+		System.out.println(allInfos);
+		return allInfos;
 	}
 }

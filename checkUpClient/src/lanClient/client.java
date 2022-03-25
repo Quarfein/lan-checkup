@@ -6,7 +6,7 @@ import java.io.*;
 public class client {
 	// initialize socket and input output streams
     private Socket socket            = null;
-    private DataInputStream  input   = null;
+    private DataInputStream  in   = null;
     private DataOutputStream out     = null;
  
     // constructor to put ip address and port
@@ -19,7 +19,8 @@ public class client {
             System.out.println("Connected");
  
             // takes input from terminal
-            input  = new DataInputStream(System.in);
+            in = new DataInputStream(
+                    new BufferedInputStream(socket.getInputStream()));
  
             // sends output to the socket
             out    = new DataOutputStream(socket.getOutputStream());
@@ -34,26 +35,27 @@ public class client {
         }
  
         // string to read message from input
-        String line = "";
  
         // keep reading until "Over" is input
-        while (!line.equals("Over"))
-        {
             try
             {
-                line = input.readLine();
-                out.writeUTF(line);
+            	String line;
+                out.writeUTF("test");
+                line = in.readUTF();
+                if (line == "succeed") {
+                	System.out.println(line);
+                	out.writeUTF("Over");
+                }
             }
             catch(IOException i)
             {
                 System.out.println(i);
             }
-        }
  
         // close the connection
         try
         {
-            input.close();
+            in.close();
             out.close();
             socket.close();
         }

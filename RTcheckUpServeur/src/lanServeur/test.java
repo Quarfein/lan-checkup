@@ -8,7 +8,6 @@ public class test {
 		
 		while (true) {
 			Server server = new Server(5000);
-			server.getClass();
 		}
 		
 	}

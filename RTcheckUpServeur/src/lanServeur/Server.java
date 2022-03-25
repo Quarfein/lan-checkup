@@ -1,12 +1,12 @@
 package lanServeur;
 
 import java.net.*;
+import java.util.List;
 import java.io.*;
 
 public class Server {
 	private Socket          socket   = null;
 	private ServerSocket    server   = null;
-	private DataInputStream in       =  null;
 	private int connectionCloseFlag = 0;
 
     // constructor with port
@@ -24,35 +24,35 @@ public class Server {
             socket = server.accept();
             System.out.println("Client accepted");
  
-            // takes input from the client socket
-            in = new DataInputStream(
-                new BufferedInputStream(socket.getInputStream()));
+            OutputStream outputStream = socket.getOutputStream();
+            // create an object output stream from the output stream so we can send an object through it
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
  
-            String line = "";
+            List<String> toSend;
  
             // reads message from client until "Over" is sent
-            while (!line.equals("Over") && connectionCloseFlag==0)
+            while (connectionCloseFlag!=1)
             {
                 try
                 {
-                    line = in.readUTF();
-                    System.out.println(line);
- 
+                    Infos infos = new Infos();
+                    toSend = infos.getInfos();
+                    
+                    System.out.println("Sending infos to client");
+                    objectOutputStream.writeObject(toSend);
                 }
                 catch(IOException i)
                 {
                     System.out.println(i);
                     connectionCloseFlag=1;
-
                 } 
 
             }
+            
             System.out.println("Closing connection");
- 
             // close connection
             socket.close();
             server.close();
-            in.close();
         }
         catch(IOException i)
         {
