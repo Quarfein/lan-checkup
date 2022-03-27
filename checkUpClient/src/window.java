@@ -1,25 +1,13 @@
-package lanClient;
+
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
 
 public class window {
     JFrame frame;
     public window() {
-        //String[][] data = Infos.getInfos();
-
-        /* Thread th = new Thread(){
-            public void run() {
-                synchronized(data) {
-                    while(true){
-                        data = infos.getInfos();
-                    }
-                }
-            }
-        }; */
 
         frame = new JFrame("CheckUp");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 400);
+        frame.setSize(800, 400);
 
         JTable table = new JTable(Infos.getInfos(), new String[]{"Machine", "OS", "Taille du disque", "Espace libre du disque", "Ram", "Espace libre de la ram", "Nom du CPU", "Fréquence du CPU", "Charge du CPU", "Température"});
 
@@ -28,5 +16,20 @@ public class window {
         frame.add(scrollPane);
 
         frame.setVisible(true);
+
+        Thread th = new Thread() {
+            public void run() {
+                while(true){
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    table.repaint();
+                }
+            }
+        };
+
+        th.run();
     }
 }

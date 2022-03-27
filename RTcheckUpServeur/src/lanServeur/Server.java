@@ -30,7 +30,6 @@ public class Server {
  
             List<String> toSend;
  
-            // reads message from client until "Over" is sent
             while (connectionCloseFlag!=1)
             {
                 try

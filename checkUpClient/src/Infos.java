@@ -1,4 +1,4 @@
-package lanClient;
+
 
 public class Infos {
     private static String[][] infos;

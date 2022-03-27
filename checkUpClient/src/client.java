@@ -1,5 +1,3 @@
-package lanClient;
-
 import java.net.*;
 import java.util.List;
 import java.io.*;
@@ -28,7 +26,7 @@ public class client {
                 for (int i = 0; i < received.size(); i++) {
                 	rec[i] = received.get(i);
                 }
-                infos.setInfos(index, rec);
+                Infos.setInfos(index, rec);
             	}
             }
             catch(IOException i)
