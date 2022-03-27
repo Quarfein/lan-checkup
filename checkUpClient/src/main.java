@@ -34,15 +34,7 @@ public class main {
 			th.start();
 		});
 
-		while(true) {
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			infos.getInfos();
-		}
-
+		new window();
 	}
 
 }

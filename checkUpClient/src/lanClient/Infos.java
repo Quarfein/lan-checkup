@@ -1,9 +1,7 @@
 package lanClient;
 
-import java.util.Arrays;
-
 public class Infos {
-    private String[][] infos;
+    private static String[][] infos;
 
     public Infos(int nbMachines) {
         infos = new String[nbMachines][];
@@ -12,13 +10,15 @@ public class Infos {
         }
     }
 
-    public void setInfos(int index, String[] info) {
+    public static void setInfos(int index, String[] info) {
         infos[index] = info;
     }
 
-    public void getInfos() {
-        for (int i = 0; i < infos.length; i++) {
-            System.out.println(Arrays.toString(infos[i]));
-        }
+    public static String[][] getInfos() {
+        return infos;
+    }
+
+    public static int getNbMachines() {
+        return infos.length;
     }
 }
