@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class main {
+public class launchClient {
 
 	public static void main(String[] args) {
 			File config = new File ("config.txt");
