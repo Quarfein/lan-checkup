@@ -7,6 +7,7 @@ import java.util.List;
 import java.io.File;
 import java.io.Serializable;
 import java.lang.management.ManagementFactory;
+import java.util.regex.*;
 
 public class Infos implements Serializable{
 	
@@ -29,13 +30,21 @@ public class Infos implements Serializable{
 		if (os.equals("Linux")) {
 			disk = new File("/");
 		}
-		else if (os.equals("Windows")) {
+		else if (Pattern.matches("Windows*", os)) {
 			disk = new File("C:");
 		}
-		diskSize = disk.getTotalSpace();
-		freeDiskSpace = disk.getFreeSpace();
-		ram = ((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getTotalPhysicalMemorySize();
-		freeRam = ((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getFreePhysicalMemorySize();
+		
+		if (disk==null) {
+			diskSize = 0;
+			freeDiskSpace = 0;
+		}
+		else {
+			diskSize = disk.getTotalSpace();
+			freeDiskSpace = disk.getFreeSpace();
+		}
+
+		ram = ((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getTotalMemorySize();
+		freeRam = ((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getFreeMemorySize();
 		cpuName = "-";
 		cpuFrequency = "-";
 		cpuLoad = ((com.sun.management.OperatingSystemMXBean) ManagementFactory.getOperatingSystemMXBean()).getSystemLoadAverage();

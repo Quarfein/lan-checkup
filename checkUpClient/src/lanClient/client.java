@@ -10,7 +10,7 @@ public class client {
     int closeConnection = 0;
  
     // constructor to put ip address and port
-    public client(String address, int port) throws ClassNotFoundException
+    public client(String address, int port, int index, Infos infos) throws ClassNotFoundException
     {
         // establish a connection
         try
@@ -24,7 +24,11 @@ public class client {
             	while(closeConnection!=1) {
             	@SuppressWarnings("unchecked")
 				List<String> received = (List<String>) objectInputStream.readObject();
-            	System.out.println(received);
+            	String[] rec = new String[received.size()];
+                for (int i = 0; i < received.size(); i++) {
+                	rec[i] = received.get(i);
+                }
+                infos.setInfos(index, rec);
             	}
             }
             catch(IOException i)

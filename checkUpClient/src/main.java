@@ -4,26 +4,45 @@ import java.util.List;
 import lanClient.*;
 public class main {
 
-	public static void main(String[] args) throws ClassNotFoundException {
+	public static void main(String[] args) {
 		List<String> addr = new ArrayList<String>();
+
+		List<Thread> threads = new ArrayList<Thread>();
+
 		
-		addr.add("134.59.139.50");
 		addr.add("127.0.0.1");
+
+		Infos infos = new Infos(addr.size());
 		
-		addr.forEach((address)->{
+		for (int i = 0; i < addr.size(); i++) {
+			final int index = i;
 			Thread th = new Thread(){
 				public void run() {
+					synchronized(infos) {
 					try {
-						client client = new client(address, 5000);
-					} catch (ClassNotFoundException e) {
-						
+						client client = new client(addr.get(index), 5000, index, infos);
+					} catch (ClassNotFoundException e) {	
 						e.printStackTrace();
 					}
 				}
+				}
 			};
+			threads.add(th);
+		}		 
+
+		threads.forEach((th)->{
 			th.start();
-		});		
-		//client client = new client("127.0.0.1",5000);
+		});
+
+		while(true) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			infos.getInfos();
+		}
+
 	}
 
 }
