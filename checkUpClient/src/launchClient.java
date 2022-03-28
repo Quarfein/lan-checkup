@@ -28,22 +28,21 @@ public class launchClient {
 						final int index = i;
 						Thread th = new Thread(){
 							public void run() {
-								synchronized(infos) {
-									try {
-										client client = new client(addr.get(index), 5000, index, infos);
-									} catch (ClassNotFoundException e) {	
-										e.printStackTrace();
-									}
-								}
+								try {
+									client client = new client(addr.get(index), 5000, index);
+								} catch (ClassNotFoundException e) {	
+									e.printStackTrace();
+								}	
 							}
 						};
-					th.start();
-				}		 
+						th.start();
+						System.out.println("Thread started");
+					}		 
 
-			new window();
-			    }
-			} catch (IOException e) {
-				e.printStackTrace();
+				new window();
+			    	}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-}
