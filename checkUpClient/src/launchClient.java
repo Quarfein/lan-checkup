@@ -19,7 +19,7 @@ public class launchClient {
 
 					Scanner reader = new Scanner(config);
 					while(reader.hasNextLine()) {
-						addr.add(reader.nextLine().replace("\n", "").replace("\r", ""));
+						addr.add(reader.nextLine());
 					}
 					
 					System.out.println(addr);
