@@ -15,8 +15,6 @@ public class launchClient {
 					
 					List<String> addr = new ArrayList<String>();
 
-					List<Thread> threads = new ArrayList<Thread>();
-
 					Scanner reader = new Scanner(config);
 					while(reader.hasNextLine()) {
 						addr.add(reader.nextLine());
@@ -39,12 +37,8 @@ public class launchClient {
 								}
 							}
 						};
-					threads.add(th);
+					th.start();
 				}		 
-
-			threads.forEach((th)->{
-				th.start();
-			});
 
 			new window();
 			    }
