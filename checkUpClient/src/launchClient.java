@@ -21,6 +21,8 @@ public class launchClient {
 					while(reader.hasNextLine()) {
 						addr.add(reader.nextLine().replace("\n", "").replace("\r", ""));
 					}
+					
+					System.out.println(addr);
 
 					Infos infos = new Infos(addr.size());
 
