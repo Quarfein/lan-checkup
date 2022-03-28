@@ -36,8 +36,6 @@ public class Server {
                 {
                     Infos infos = new Infos();
                     toSend = infos.getInfos();
-                    
-                    System.out.println("Sending infos to client");
                     objectOutputStream.writeObject(toSend);
                 }
                 catch(IOException i)
