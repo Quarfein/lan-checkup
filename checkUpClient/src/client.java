@@ -8,7 +8,7 @@ public class client {
     int closeConnection = 0;
  
     // constructor to put ip address and port
-    public client(String address, int port, int index, Infos infos) throws ClassNotFoundException
+    public client(String address, int port, int index) throws ClassNotFoundException
     {
         // establish a connection
         try
