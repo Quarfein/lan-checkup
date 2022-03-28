@@ -19,7 +19,7 @@ public class launchClient {
 
 					Scanner reader = new Scanner(config);
 					while(reader.hasNextLine()) {
-						addr.add(reader.nextLine());
+						addr.add(reader.nextLine().replace("\n", "").replace("\r", ""));
 					}
 
 					Infos infos = new Infos(addr.size());
