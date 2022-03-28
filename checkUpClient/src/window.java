@@ -26,6 +26,7 @@ public class window {
                         e.printStackTrace();
                     }
                     table.repaint();
+                    System.out.println(Infos.getInfos());
                 }
             }
         };
